@@ -1,0 +1,20 @@
+# Node
+node_modules/
+package-lock.json
+
+# macOS
+.DS_Store
+
+# Vite / dev
+.vite/
+
+# Editor & OS
+.vscode/
+.idea/
+*.log
+
+# Tests
+/coverage/
+
+# Ignore recovered stash branch marker
+recovered-stash

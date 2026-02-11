@@ -139,6 +139,16 @@ export function Navbar() {
                     Profile
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to={`/account`}
+                    style={{ color: 'var(--color-text)' }}
+                    className="cursor-pointer flex items-center"
+                  >
+                    <User className="mr-2 h-4 w-4" />
+                    Account
+                  </Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={handleLogout}
                   style={{ color: 'var(--color-text)' }}

@@ -168,6 +168,28 @@ app.post("/make-server-7c20c7e0/signup", async (c) => {
 
     console.log(`[Signup] User profile stored in KV`);
 
+    // Create a default profile for the user (one account -> multiple profiles)
+    try {
+      const profileId = crypto.randomUUID();
+      const profile = {
+        id: profileId,
+        userId: data.user.id,
+        displayName: name,
+        bio: '',
+        avatar: null,
+        visibility: 'public',
+        createdAt: new Date().toISOString(),
+      };
+
+      await kv.set(`profile:${profileId}`, profile);
+
+      // add to user's profiles list
+      await kv.set(`user:${data.user.id}:profiles`, [profileId]);
+      console.log(`[Signup] Default profile created with id: ${profileId}`);
+    } catch (profileErr) {
+      console.log(`[Signup] Failed to create default profile: ${profileErr}`);
+    }
+
     return c.json({ 
       user: data.user,
       message: 'User created successfully. You can now login.'
